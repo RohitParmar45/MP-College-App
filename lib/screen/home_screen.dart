@@ -1,5 +1,6 @@
 import 'package:college_app/screen/course_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Home_Screen extends StatelessWidget {
   Home_Screen({super.key});
@@ -60,6 +61,7 @@ class Home_Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     return Scaffold(
       body: ListView(
         children: [
@@ -220,9 +222,10 @@ class Home_Screen extends StatelessWidget {
                           Padding(
                             padding: EdgeInsets.all(10),
                             child: Image.asset(
-                              "image/${imgList[index]}.png",
-                              width: 100,
-                              height: 100,
+                              // 'assets/image/study_chair.png',
+                              "assets/image/${imgList[index]}.png",
+                              width: 80,
+                              height: 80,
                             ),
                           ),
                           SizedBox(
