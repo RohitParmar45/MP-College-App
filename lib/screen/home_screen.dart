@@ -1,18 +1,28 @@
+import 'package:college_app/screen/ai_chat_bot/consts.dart';
 import 'package:college_app/screen/course_screen.dart';
+import 'package:college_app/screen/pdf_list_screen.dart';
+import 'package:college_app/screen/pdf_screen.dart';
+import 'package:college_app/screen/see_all_course.dart';
+import 'package:college_app/screen/std_video_pyq_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Home_Screen extends StatelessWidget {
+class Home_Screen extends StatefulWidget {
   Home_Screen({super.key});
 
-  List catNames = [
-    "Category",
-    "Classes",
-    "Free Course",
-    "BookStore",
-    "Live Course",
-    "LeaderBoard"
-  ];
+  @override
+  State<Home_Screen> createState() => _Home_ScreenState();
+}
+
+class _Home_ScreenState extends State<Home_Screen> {
+  // List favouriteList = [
+  //   "Computer Networking",
+  //   "Data Structure",
+  //   "DBMS",
+  //   "Theory of Computation",
+  //   "Software Engineering",
+  //   "Cryptography"
+  // ];
 
   List<Color> catColors = [
     Color(0xFFFFFCF2F),
@@ -57,6 +67,7 @@ class Home_Screen extends StatelessWidget {
   ];
 
   List imgList = ["Flutter", "React_Native", "Flutter", "Python"];
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -67,7 +78,7 @@ class Home_Screen extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 10),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Color(0xFF674AEF),
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(20),
@@ -75,7 +86,7 @@ class Home_Screen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Icon(
@@ -87,27 +98,36 @@ class Home_Screen extends StatelessWidget {
                       Icons.notifications,
                       size: 30,
                       color: Colors.white,
-                    )
+                    ),
                   ],
                 ),
                 SizedBox(
                   width: 20,
                 ),
-                const Padding(
+                Padding(
                   padding: EdgeInsets.only(left: 3, right: 15),
-                  child: Text(
-                    textAlign: TextAlign.start,
-                    "Hi, Vivek",
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 3,
-                        wordSpacing: 2,
-                        color: Colors.white),
+                  child: InkWell(
+                    child: const Text(
+                      textAlign: TextAlign.start,
+                      "Hi, Vivek",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 3,
+                          wordSpacing: 2,
+                          color: Colors.white),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StudyVideoPyqScreen(),
+                          ));
+                    },
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 5, bottom: 20),
+                  margin: const EdgeInsets.only(top: 5, bottom: 20),
                   width: width,
                   height: 55,
                   alignment: Alignment.center,
@@ -133,11 +153,41 @@ class Home_Screen extends StatelessWidget {
               ],
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15, right: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Course",
+                  style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
+                ),
+                InkWell(
+                  onTap: () async {
+                    final result = await Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SeeAllCourse();
+                    }));
+                  },
+                  child: Text(
+                    "See All",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF674AEF)),
+                  ),
+                )
+              ],
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
             child: Column(children: [
               GridView.builder(
-                itemCount: catNames.length,
+                itemCount: favouriteList.length,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -148,19 +198,24 @@ class Home_Screen extends StatelessWidget {
                   return Column(
                     children: [
                       Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          color: catColors[index],
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(child: catIcons[index]),
-                      ),
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: catColors[index],
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.library_books,
+                              color: Colors.white,
+                            ),
+                          )),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
-                        catNames[index],
+                        favouriteList[index],
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
@@ -170,108 +225,80 @@ class Home_Screen extends StatelessWidget {
                   );
                 },
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Course",
-                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    "See All",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF674AEF)),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio:
-                      (MediaQuery.of(context).size.height - 50 - 25) /
-                          (4 * 240),
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                ),
-                itemCount: imgList.length,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CourseScreeen(imgList[index]),
-                          ));
-                    },
-                    child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(0xFFF5F3FF),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Image.asset(
-                              // 'assets/image/study_chair.png',
-                              "assets/image/${imgList[index]}.png",
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            imgList[index],
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "55 Videos",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black.withOpacity(0.5),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              )
+
+              // const SizedBox(
+              //   height: 10,
+              // ),
+
+              // GridView.builder(
+              //   shrinkWrap: true,
+              //   physics: NeverScrollableScrollPhysics(),
+              //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //     crossAxisCount: 2,
+              //     childAspectRatio:
+              //         (MediaQuery.of(context).size.height - 50 - 25) /
+              //             (4 * 240),
+              //     mainAxisSpacing: 10,
+              //     crossAxisSpacing: 10,
+              //   ),
+              //   itemCount: imgList.length,
+              //   itemBuilder: (context, index) {
+              //     return InkWell(
+              //       onTap: () {
+              //         Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => CourseScreeen(imgList[index]),
+              //             ));
+              //       },
+              //       child: Container(
+              //         padding:
+              //             EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(20),
+              //           color: Color(0xFFF5F3FF),
+              //         ),
+              //         child: Column(
+              //           children: [
+              //             Padding(
+              //               padding: EdgeInsets.all(10),
+              //               child: Image.asset(
+              //                 // 'assets/image/study_chair.png',
+              //                 "assets/image/${imgList[index]}.png",
+              //                 width: 80,
+              //                 height: 80,
+              //               ),
+              //             ),
+              //             SizedBox(
+              //               height: 10,
+              //             ),
+              //             Text(
+              //               imgList[index],
+              //               style: TextStyle(
+              //                 fontSize: 22,
+              //                 fontWeight: FontWeight.w600,
+              //                 color: Colors.black.withOpacity(0.6),
+              //               ),
+              //             ),
+              //             SizedBox(
+              //               height: 10,
+              //             ),
+              //             Text(
+              //               "55 Videos",
+              //               style: TextStyle(
+              //                 fontSize: 15,
+              //                 fontWeight: FontWeight.w500,
+              //                 color: Colors.black.withOpacity(0.5),
+              //               ),
+              //             )
+              //           ],
+              //         ),
+              //       ),
+              //     );
+              //   },
+              // )
             ]),
           )
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        iconSize: 32,
-        selectedItemColor: Color(0xFF674AEF),
-        selectedFontSize: 18,
-        unselectedItemColor: Colors.grey,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.assignment), label: 'Courses'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.favorite), label: 'Wishlist'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
         ],
       ),
     );
