@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "575502485664",
+    "project_id": "mp-college-app",
+    "storage_bucket": "mp-college-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575502485664:android:20cd4e34031f59d609a1c5",
+        "android_client_info": {
+          "package_name": "com.rohitparmar.college_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUwKkx2p28RtakZQBtmyGl_Z2pnNEMvYU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
