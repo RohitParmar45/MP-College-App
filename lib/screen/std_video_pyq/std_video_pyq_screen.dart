@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:college_app/model/subject_model.dart';
 import 'package:college_app/screen/course_screen.dart';
 import 'package:college_app/screen/pdf_list_screen.dart';
+import 'package:college_app/screen/std_video_pyq/PyqScreen.dart';
 import 'package:flutter/material.dart';
 
 class VideoScreen extends StatelessWidget {
@@ -11,20 +14,6 @@ class VideoScreen extends StatelessWidget {
       ),
       body: Center(
         child: Text('Video Screen'),
-      ),
-    );
-  }
-}
-
-class PyqScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Previous Year Questions'),
-      ),
-      body: Center(
-        child: Text('Pyq Screen'),
       ),
     );
   }

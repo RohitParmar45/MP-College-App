@@ -40,6 +40,9 @@ dependencies:
   dash_chat_2: ^0.0.18
   chat_gpt_sdk: ^2.2.5
   firebase_core:
+  cloud_firestore: ^4.13.3
+  firebase_auth: ^4.4.0
+  shared_preferences: ^2.0.10
   
   # pdfx: ^2.6.0
 

@@ -139,7 +139,7 @@ class _SeeAllCourseState extends State<SeeAllCourse> {
                                     if (favouriteList
                                         .contains(filteredList[index])) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                               content: Text('Already Added'),
                                               duration: Duration(
                                                   milliseconds: 1000)));
@@ -147,7 +147,7 @@ class _SeeAllCourseState extends State<SeeAllCourse> {
                                       favouriteList.add(filteredList[index]);
                                       setState(() {
                                         ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackBar(
+                                            .showSnackBar(const SnackBar(
                                           content: Text('Added'),
                                           duration:
                                               Duration(milliseconds: 1000),

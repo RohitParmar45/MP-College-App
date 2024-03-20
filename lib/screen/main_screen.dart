@@ -4,7 +4,7 @@ import 'package:college_app/screen/course_screen.dart';
 import 'package:college_app/screen/home_screen.dart';
 import 'package:college_app/screen/other_service.dart';
 import 'package:college_app/screen/profile_screen.dart';
-import 'package:college_app/screen/std_video_pyq_screen.dart';
+import 'package:college_app/screen/std_video_pyq/std_video_pyq_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
